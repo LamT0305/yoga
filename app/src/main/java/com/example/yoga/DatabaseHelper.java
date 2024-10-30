@@ -15,7 +15,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Classes table
     public static final String TABLE_CLASSES = "Classes";
     public static final String COLUMN_CLASS_ID = "class_id";
-    public static final String COLUMN_CLASS_NAME = "name";
     public static final String COLUMN_DAY_OF_WEEK = "day_of_week";
     public static final String COLUMN_TIME = "time";
     public static final String COLUMN_CAPACITY = "capacity";
@@ -36,7 +35,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // SQL statements to create tables
     private static final String CREATE_TABLE_CLASSES = "CREATE TABLE " + TABLE_CLASSES + " ("
             + COLUMN_CLASS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_CLASS_NAME + " TEXT NOT NULL, "
             + COLUMN_DAY_OF_WEEK + " TEXT NOT NULL, "
             + COLUMN_TIME + " TEXT NOT NULL, "
             + COLUMN_CAPACITY + " INTEGER, "
@@ -74,10 +72,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // CRUD operations for Classes
 
     // Add new class
-    public boolean addClass(String name, String dayOfWeek, String time, int capacity, int duration, double price, String type, String teacher, String description) {
+    public boolean addClass(String dayOfWeek, String time, int capacity, int duration, double price, String type, String teacher, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_CLASS_NAME, name);
         values.put(COLUMN_DAY_OF_WEEK, dayOfWeek);
         values.put(COLUMN_TIME, time);
         values.put(COLUMN_CAPACITY, capacity);
@@ -97,10 +94,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean updateClass(int ID, String name, String dayOfWeek, String time, int capacity, int duration, double price, String type, String teacher, String description){
+    public boolean updateClass(int ID, String dayOfWeek, String time, int capacity, int duration, double price, String type, String teacher, String description){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_CLASS_NAME, name);
         values.put(COLUMN_DAY_OF_WEEK, dayOfWeek);
         values.put(COLUMN_TIME, time);
         values.put(COLUMN_CAPACITY, capacity);

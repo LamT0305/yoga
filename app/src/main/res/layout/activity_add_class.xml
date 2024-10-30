@@ -199,10 +199,40 @@
             />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/description"
+        android:id="@+id/teacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/classType"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Teacher:"
+            android:textSize="18dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.3"/>
+
+        <EditText
+            android:id="@+id/inputTeacher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Input Teacher's name"
+            android:background="@drawable/shape_drawable"
+            android:padding="10dp"
+            android:layout_weight="0.5"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/teacher"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"

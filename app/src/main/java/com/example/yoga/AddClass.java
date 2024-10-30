@@ -24,9 +24,11 @@ import java.util.Calendar;
 
 public class AddClass extends AppCompatActivity {
     Spinner dayOfWeek;
-    EditText description, classType, price, duration, capacity;
+    EditText description, classType, price, duration, capacity, teacherName;
     TextView timeCourse;
     Button addClassBtn;
+    DatabaseHelper DB;
+    private boolean isPickedTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class AddClass extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         addClassBtn = findViewById(R.id._addClassBtn);
         classType = findViewById(R.id.inputType);
         price = findViewById(R.id.inputPrice);
@@ -45,7 +48,9 @@ public class AddClass extends AppCompatActivity {
         timeCourse = findViewById(R.id.inputTime);
         dayOfWeek = findViewById(R.id.inputDay);
         description = findViewById(R.id.inputDescription);
-
+        teacherName = findViewById(R.id.inputTeacher);
+        isPickedTime = false;
+        DB = new DatabaseHelper(AddClass.this);
 
         // text overflow
         textOverFlow(); // done
@@ -53,16 +58,26 @@ public class AddClass extends AppCompatActivity {
 
 //        handle add button
         addClassBtn.setOnClickListener(v -> {
-            if (description.getText().toString().trim().isEmpty()){
-                description.setError("This field is required");
-            }else if (capacity.getText().toString().trim().isEmpty()){
-                capacity.setError("This field is required");
-            }else if (duration.getText().toString().trim().isEmpty()){
-                duration.setError("This field is required");
-            } else if (price.getText().toString().trim().isEmpty()) {
-                price.setError("This field is required");
-            } else if (classType.getText().toString().trim().isEmpty()) {
-                classType.setError("This field is required");
+            if (!validateField(description) || !validateField(capacity) || !validateField(duration) || !validateField(price) || !validateField(classType)) {
+                return;
+            }
+            if (!isPickedTime){
+                Toast.makeText(this, "Please pick a time!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String selectedDay = dayOfWeek.getSelectedItem().toString();
+            String timeOfCourse = timeCourse.getText().toString();
+            int _capacity = Integer.parseInt(capacity.getText().toString());
+            int _duration = Integer.parseInt(duration.getText().toString());
+            double _price = Double.parseDouble(price.getText().toString());
+            String _classType = classType.getText().toString();
+            String teacher = teacherName.getText().toString();
+            String _description = description.getText().toString();
+            boolean checkAddClass = DB.addClass(selectedDay, timeOfCourse, _capacity, _duration, _price, _classType, teacher, _description);
+            if (checkAddClass){
+                Toast.makeText(this, "Added class successfully!", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "Failed to add class!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -91,7 +106,9 @@ public class AddClass extends AppCompatActivity {
                 (TimePicker view, int selectedHour, int selectedMinute) -> {
                     // Format the selected time and set it to EditText
                     String time = String.format("%02d:%02d", selectedHour, selectedMinute);
+
                     timeEditText.setText(time);
+                    isPickedTime = true;
                 }, hour, minute, true); // Set true for 24-hour format, false for AM/PM format
 
         // Show the TimePickerDialog
@@ -126,4 +143,11 @@ public class AddClass extends AppCompatActivity {
         });
     }
 
+    private boolean validateField(EditText field){
+        if(field.getText().toString().trim().isEmpty()){
+            field.setError("This field is required!");
+            return false;
+        }
+        return true;
+    }
 }

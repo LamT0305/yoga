@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(Login.this, YogaClass.class);
                 startActivity(intent);
                 finish();
-                Toast.makeText(Login.this, "Login successfully!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Login.this, "Login successfully!", Toast.LENGTH_SHORT).show();
             }
         });
     }
