@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/background"
+    >
+
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="Login"
+        android:textSize="16dp"
+        android:layout_alignParentBottom="true"/>
+
+
+
+</RelativeLayout>
