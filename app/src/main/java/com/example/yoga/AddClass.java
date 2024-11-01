@@ -74,9 +74,11 @@ public class AddClass extends AppCompatActivity {
             String teacher = teacherName.getText().toString();
             String _description = description.getText().toString();
             boolean checkAddClass = DB.addClass(selectedDay, timeOfCourse, _capacity, _duration, _price, _classType, teacher, _description);
-            if (checkAddClass){
+            if (checkAddClass) {
+                setResult(RESULT_OK);  // Indicate success to trigger refresh in YogaClass
+                finish();  // Close AddClass activity
                 Toast.makeText(this, "Added class successfully!", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 Toast.makeText(this, "Failed to add class!", Toast.LENGTH_SHORT).show();
             }
         });

@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="12dp"
     app:cardCornerRadius="16dp"
+    android:layout_margin="16dp"
+    android:backgroundTint="#efefef"
     android:id="@+id/class_card"
     >
 
@@ -13,7 +15,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="16dp"
-        android:background="@drawable/shape_drawable"
         android:padding="8dp"
         >
         <LinearLayout

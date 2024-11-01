@@ -37,7 +37,6 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, YogaClass.class);
                 startActivity(intent);
-                finish();
 //                Toast.makeText(Login.this, "Login successfully!", Toast.LENGTH_SHORT).show();
             }
         });
